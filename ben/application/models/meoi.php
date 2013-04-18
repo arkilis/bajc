@@ -36,7 +36,7 @@ class MEOI extends CI_Model{
             'org'=>$this->security->xss_clean($this->input->post('org')),
             'doc1'=>$this->security->xss_clean($this->input->post('word')),
             'doc2'=>$this->security->xss_clean($this->input->post('pdf'))
-        };
+        );
         $this->db->insert('eoi_user', $data);
     }
 

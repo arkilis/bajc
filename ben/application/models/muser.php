@@ -37,8 +37,7 @@ class MUser extends CI_Model{
         else
             return false;
     } 
-
-
+    
     // add a new user
     function addUser(){
         $data= array(
@@ -83,6 +82,25 @@ class MUser extends CI_Model{
         $this->db->update('user', $data);
     }
 
+    // update user's details
+    function updateInfo($userid)
+    {
+        $data= array(
+            'email' => $this->security->xss_clean($this->input->post('email')),   
+            'title' => $this->security->xss_clean($this->input->post('title')),   
+            'gender' => $this->security->xss_clean($this->input->post('gender')),
+            'fname' => $this->security->xss_clean($this->input->post('fname')),
+            'lname' => $this->security->xss_clean($this->input->post('lname')),
+            'password' => $this->security->xss_clean($this->input->post('password')),
+            'mobile'=>$this->security->xss_clean($this->input->post('mobile')),
+            'work_phone'=>$this->security->xss_clean($this->input->post('work_phone')),
+            'address'=>$this->security->xss_clean($this->input->post('address')),
+        );
+
+        $this->db->where('id', $userid);
+        $this->db->update('user', $data);
+ 
+    } 
 
 }
 

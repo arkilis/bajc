@@ -7,7 +7,7 @@ class MProposal extends CI_Model{
     }
     
     // add an proposal 
-    function addEOI()
+    function addProposal()
     {
         
     }

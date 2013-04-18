@@ -5,7 +5,14 @@ class Login extends CI_Controller {
     // login and index page
 	public function index()
 	{
-        $this->load->view('login');
+        $this->load->library('session');
+         
+        // if session set
+        if($this->session->userdata('is_logged_in'))
+            $this->load->view('applicant_eoi');
+        else    
+        // if session not set
+            $this->load->view('login');
 	}
 
     // login controller
@@ -46,6 +53,7 @@ class Login extends CI_Controller {
                     'is_logged_in' => true
                 );
 
+                $this->load->library('session');
                 $this->session->set_userdata($data);
                 
                 // redirect to diff page
@@ -96,6 +104,28 @@ class Login extends CI_Controller {
                
     }
 
+    // logout
+    public function logout()
+    {
+        $this->load->library('session');
+        $data= array(
+            'email' =>  "",
+            'id'=>      "",
+            'title'=>   "",
+            'fname'=>   "",
+            'lname'=>   "",
+            'gender'=>  "",
+            'mobile'=>  "",
+            'phone'=>   "",
+            'address'=> "",
+            'type'=>    "",
+            'is_logged_in' => NULL
+        );
+        $this->session->unset_userdata($data); // destroy session
+        echo("<script>alert('Thank you for using!')</script>");
+        $this->load->view('login');
+    }
+    
     // delete an user
     public function delUser($userid)
     {
@@ -134,6 +164,12 @@ class Login extends CI_Controller {
     function thanks()
     {
         echo("<h1>Thank you!</h1>");
+    }
+        
+    // testing page
+    function goProjectPage()
+    {
+        $this->load->view("applicant_project");
     }
 
 }

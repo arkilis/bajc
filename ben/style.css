@@ -1,14 +1,14 @@
 /* CSS Document */
-body{padding:0; margin:0; background:url(images/main-bg.gif) 0 0 repeat-x #FFF; font:14px/20px Arial, Helvetica, sans-serif; color:#3D3C2C; font-weight:normal;}
-div, p, h1, h2, h3, ul, img{padding:0px; margin:0px;}
+body{padding:0; margin:0; font:14px/20px Arial, Helvetica, sans-serif; color:#3D3C2C; font-weight:normal;}
+/* div, p, h1, h2, h3, ul, img{padding:0px; margin:0px;} */
 ul{list-style-type:none;}
 
 /* TOP PANEL */
 #topPan{width:960px; height:150px; position:relative; margin:0 auto; padding:0;}
 /*#topPan img{width:204px; height:57px; display:block; padding:23px 0 0 6px;}*/
 /* navigation Panel */
-#topPan #user {width:150px;height:20px; top:0px; float:right; margin-top:10px; color: #99003F}
-#topPan ul{width:320px; height:96px; display:block; position:absolute; top:0px; right:0px; margin:0; padding:65px 0 0 0 ;}
+#info {width:200px; float:right; color: #99003F; position:relative; top:-90px; z-index:99}
+#topPan ul{width:320px; height:20px; display:block; position:absolute; top:0px; right:0px; margin:0; padding:85px 0 0 0 ;}
 #topPan ul li{float:left; width:104px; display:block; text-align:center;}
 #topPan ul li a{width:104px; height:20px; display:block; font:14px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E4E00; repeat-x #FFF; text-decoration:none; margin:0; margin: 15px 0 0 0;}
 #topPan ul li a:hover{ width:104px;display:block; background:#EAEAEA; color:#2E4E00; text-decoration:none;}
@@ -43,6 +43,12 @@ ul{list-style-type:none;}
 #leftPan #item4 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
 #leftPan #item4 a{text-decoration:none; display:block; width:237px; height:62px;}
 #leftPan #item4 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
+
+#leftPan #item5{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon3-nor.gif) 0 0 no-repeat;}
+#leftPan #item5 h2{width:90px; height:10px; background:#fff; display:block; position:absolute; left:0px; top:0px; margin:14px 0 5px 81px; font:16px/14px Georgia, "Times New Roman", Times, serif; color:#CC0000; z-index:1; text-transform:uppercase;}
+#leftPan #item5 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
+#leftPan #item5 a{text-decoration:none; display:block; width:237px; height:62px;}
+#leftPan #item5 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
 
 /* BODY PANEL */
 

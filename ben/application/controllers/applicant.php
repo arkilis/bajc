@@ -20,8 +20,8 @@ class Applicant extends CI_Controller {
         $this->load->library('form_validation');
         $this->form_validation->set_rules('eoiTitle', 'EOI Title', 'required');
         $this->form_validation->set_rules('org', 'Organization', 'required');
-        $this->form_validation->set_rules('word', 'Word File', 'required');
-        $this->form_validation->set_rules('pdf', 'PDF File', 'required');
+        $this->form_validation->set_rules('word_doc', 'Word File', 'required');
+        $this->form_validation->set_rules('pdf_doc', 'PDF File', 'required');
     
         if($this->form_validation->run() == FALSE)
             $this->load->view('applicant_eoi');
@@ -29,6 +29,7 @@ class Applicant extends CI_Controller {
         {
             $this->load->model("meoi");
             $ret= $this->meoi->addEOIUser();
+            
         }
 
     }
@@ -42,6 +43,7 @@ class Applicant extends CI_Controller {
     // submit proposal
     public function addProposal()
     {
+        
     }
     
     // go project submission page
@@ -59,6 +61,39 @@ class Applicant extends CI_Controller {
     public function goApplicantOtherDoc()
     {
         $this->load->view('applicant_otherdoc');
+    }
+
+    // go update profile page
+    public function goUpdateProfile()
+    {
+        $this->load->view('applicant_updateProfile');
+    }
+    
+    // update profile
+    public function updateProfile()
+    {
+
+        // vlidate input
+        $this->load->library('form_validation');
+        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');        
+        $this->form_validation->set_rules('fname', 'First Name', 'required');        
+        $this->form_validation->set_rules('lname', 'Last Name', 'required');        
+        $this->form_validation->set_rules('password', 'Password', 'required|repassword');        
+        $this->form_validation->set_rules('password', 'Password Confirmation', 'required');        
+        if ($this->form_validation->run() == FALSE)
+        {
+            $this->load->view('applicant_updateProfile');
+        }
+        else
+        {
+            // call muser model 
+            //echo("<h1>Thank you for registration!</h1>"); 
+            $this->load->helper('url');    
+            $this->load->model('MUser', '', TRUE);
+            $this->load->library('session');    
+            $this->MUser->updateInfo($this->session->userdata('id'));
+             
+        }
     }
 
 }
