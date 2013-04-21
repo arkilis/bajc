@@ -50,6 +50,11 @@ ul{list-style-type:none;}
 #leftPan #item5 a{text-decoration:none; display:block; width:237px; height:62px;}
 #leftPan #item5 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
 
+#leftPan #item6{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon3-nor.gif) 0 0 no-repeat;}
+#leftPan #item6 h2{width:90px; height:10px; background:#fff; display:block; position:absolute; left:0px; top:0px; margin:14px 0 5px 81px; font:16px/14px Georgia, "Times New Roman", Times, serif; color:#CC0000; z-index:1; text-transform:uppercase;}
+#leftPan #item6 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
+#leftPan #item6 a{text-decoration:none; display:block; width:237px; height:62px;}
+#leftPan #item6 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
 /* BODY PANEL */
 
 #mid-bogy {width:80%; }
@@ -127,3 +132,6 @@ ul{list-style-type:none;}
 
 
 .error {color:red}
+
+.docTable {text-align:center; width:100%}
+.heading {font-weight:bold; background-color:#EAEAEA}
