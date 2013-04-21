@@ -9,7 +9,18 @@ class Login extends CI_Controller {
          
         // if session set
         if($this->session->userdata('is_logged_in'))
-            $this->load->view('applicant_eoi');
+        {
+            if($this->session->userdata('type')==0)
+                redirect("applicant/goApplicantEOI");
+            if($this->session->userdata('type')==1)
+                redirect("admin/goViewEOI");
+            if($this->session->userdata('type')==2)
+                redirect("tac/index");
+            if($this->session->userdata('type')==3)
+                redirect("board/index");
+
+            
+        }
         else    
         // if session not set
             $this->load->view('login');
@@ -35,7 +46,7 @@ class Login extends CI_Controller {
             $this->load->model("muser");
             $validate= $this->muser->validate($this->input->post('email'), $this->input->post('password'));
       
-            var_dump($validate); 
+            //var_dump($validate); 
             if($validate["id"]!="")
             {
                 // should be a php array contain all necessary info of a user
@@ -56,15 +67,15 @@ class Login extends CI_Controller {
                 $this->load->library('session');
                 $this->session->set_userdata($data);
                 
-                // redirect to diff page
-                if($data['type']==0)
+                // redirect to diff user page
+                if($data['type']==0)  // applicant
                     redirect('applicant/goApplicantEOI');
-                elseif($data['type']==1)
-                    redirect('welcome/thanks', 'refresh');
-                elseif($data['type']==2)
-                    redirect('welcome/thanks', 'refresh');
-                else
-                    redirect('welcome/thanks', 'refresh');
+                elseif($data['type']==1)  // admin
+                    redirect('admin/goViewEOI', 'refresh');
+                elseif($data['type']==2)  // TAC
+                    redirect('tac/index', 'refresh');
+                else  // board member
+                    redirect('board/index', 'refresh');
             }
             else
                 $this->index(); // incorrect email or password

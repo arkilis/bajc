@@ -32,7 +32,7 @@
                 </tr>
                 <tr>
                     <td></td>
-                    <td><input type="submit" /></td> 
+                    <td><input type="submit" value="Submit" /></td> 
                     <td></td> 
                 </tr>
                 <tr>

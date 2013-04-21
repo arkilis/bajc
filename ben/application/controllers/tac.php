@@ -1,41 +1,43 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Tac extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
-		#$this->load->view('welcome_message');
-        $this->load->helper('form');
-        $data['title']= "Add a new user";
-        $data['headline']= "Welcome to user registration!";
-        $this->load->vars($data);
-        $this->load->view('users');
+        $this->load->view('tac_eoi');
 	}
 
-    // save user
-    function save()
+    // go EOI list page
+    function goViewEOIs()
     {
-        $this->load->helper('url');
-        $this->load->model('MUser', '', TRUE);
-        $this->MUser->addUser();
-        redirect('Welcome/thanks', 'refresh');
-    }
-    
+       $this->load->view("tac_eoi"); 
+    } 
+
+    // go Proposal list page
+    function goViewProposal()
+    {
+       $this->load->view("tac_proposal"); 
+    } 
+
+    // go Project list page
+    function goViewProject()
+    {
+       $this->load->view("tac_project"); 
+    } 
+    // go reports list page
+    function goViewReport()
+    {
+       $this->load->view("tac_report"); 
+    } 
+    // go other document list page
+    function goViewOtherDocs()
+    {
+       $this->output->enable_profiler(TRUE); 
+       $this->load->model('mdocuments');
+       $data['ay_res']= $this->mdocuments->getAllDocs();
+       print_r($data);
+       //$this->load->view("tac_otherDocs", $data); 
+    } 
     // thanks page
     function thanks()
     {

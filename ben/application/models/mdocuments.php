@@ -17,7 +17,7 @@ class MDocuments extends CI_Model{
         return date('Y-m-d H:i:s');
     }
  
-    // add a document 
+    // add a document record 
     function addDoc()
     {
         $dateTime= $this->getDateTime();
@@ -34,7 +34,7 @@ class MDocuments extends CI_Model{
     function delDoc($docid)
     {
         $this->db->where('id', $docid); 
-        $this->db->delete('documents'); 
+        return $this->db->delete('documents'); 
     }
 
     // list all documents, return an array
@@ -55,10 +55,51 @@ class MDocuments extends CI_Model{
                 $ay_res[$row->id]=$ay_tmp; 
             }
         }
-
         return $ay_res; 
     } 
 
+    // list all documents by year, return an array
+    // docid=> array(docname, docpath, subdate)
+    function getAllDocsByYear($year)
+    {
+    } 
 
+    // get document by docID, return an array
+    // docid, docName, docPath, docDateTime
+    function getDocById($docID)
+    {
+        $this->db->select("*");  
+        $this->db->from("documents");  
+        $this->db->where("id", $docID);
+        $this->db->limit(1);
+        $query= $this->db->get();
+
+        if($query->num_rows == 1)
+        {
+            $ay_res= array();
+            foreach($query->result() as $row)
+            {
+                $ay_res['id']=$row->id;
+                $ay_res['docname']=$row->docname;
+                $ay_res['docpath']=$row->docpath;
+                $ay_res['subdate']=$row->subdate;
+            }
+            return $ay_res;
+        } 
+    }
+
+    // update document record
+    function updateDoc($docID, $docname)
+    {
+        $data= array(
+            'docname' => $docname
+        );
+        
+        $this->db->where('id', $docID);
+        return $this->db->update('documents', $data);
+    
+    }
+
+ 
 }
 ?>

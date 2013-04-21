@@ -1,41 +1,34 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-class Welcome extends CI_Controller {
+class Board extends CI_Controller {
 
-	/**
-	 * Index Page for this controller.
-	 *
-	 * Maps to the following URL
-	 * 		http://example.com/index.php/welcome
-	 *	- or -  
-	 * 		http://example.com/index.php/welcome/index
-	 *	- or -
-	 * Since this controller is set as the default controller in 
-	 * config/routes.php, it's displayed at http://example.com/
-	 *
-	 * So any other public methods not prefixed with an underscore will
-	 * map to /index.php/welcome/<method_name>
-	 * @see http://codeigniter.com/user_guide/general/urls.html
-	 */
 	public function index()
 	{
-		#$this->load->view('welcome_message');
-        $this->load->helper('form');
-        $data['title']= "Add a new user";
-        $data['headline']= "Welcome to user registration!";
-        $this->load->vars($data);
-        $this->load->view('users');
+		$this->load->view('board_project_reports');
 	}
 
-    // save user
-    function save()
+    // go to view all projects and reports
+    function goViewProjReports()
     {
-        $this->load->helper('url');
-        $this->load->model('MUser', '', TRUE);
-        $this->MUser->addUser();
-        redirect('Welcome/thanks', 'refresh');
+        $this->load->view("board_project_reports");
     }
     
+    // go to view all projects reports
+    /*
+    function goViewReports()
+    {
+        $this->load->view("board_reports");
+    }
+    */
+
+    // go to view all the other documents 
+    function goViewOther()
+    {
+        $this->load->model('mdocuments');
+        $data['ay_res']= $this->mdocuments->getAllDocs();
+        $this->load->view("board_otherDocs", $data);
+    }
+
     // thanks page
     function thanks()
     {

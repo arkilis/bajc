@@ -1,4 +1,10 @@
 <?php
+/****************************************************
+User class for all users (Applicant, TAC Member, Admi
+n, Board Member)
+
+*****************************************************/
+
 
 class MUser extends CI_Model{
 
@@ -6,7 +12,7 @@ class MUser extends CI_Model{
         parent::__construct();
     }
 
-    // login
+    // login validation
     function validate($email, $password)
     {
         $this->db->select('*');
@@ -36,9 +42,31 @@ class MUser extends CI_Model{
         }
         else
             return false;
-    } 
-    
-    // add a new user
+    }
+
+    // logout
+    function logout()
+    {
+        $this->load->library('session');
+        $data= array(
+            'email' =>  "",
+            'id'=>      "",
+            'title'=>   "",
+            'fname'=>   "",
+            'lname'=>   "",
+            'gender'=>  "",
+            'mobile'=>  "",
+            'phone'=>   "",
+            'address'=> "",
+            'type'=>    "",
+            'is_logged_in' => NULL
+        );
+        $this->session->unset_userdata($data); // destroy session
+        echo("<script>alert('Thank you for using!')</script>");
+        $this->load->view('login');
+    }
+
+    // add a new user to db
     function addUser(){
         $data= array(
             'title'=>$this->security->xss_clean($this->input->post('title')),
@@ -86,20 +114,19 @@ class MUser extends CI_Model{
     function updateInfo($userid)
     {
         $data= array(
-            'email' => $this->security->xss_clean($this->input->post('email')),   
             'title' => $this->security->xss_clean($this->input->post('title')),   
             'gender' => $this->security->xss_clean($this->input->post('gender')),
             'fname' => $this->security->xss_clean($this->input->post('fname')),
             'lname' => $this->security->xss_clean($this->input->post('lname')),
-            'password' => $this->security->xss_clean($this->input->post('password')),
+            'password' => md5($this->security->xss_clean($this->input->post('password'))),
             'mobile'=>$this->security->xss_clean($this->input->post('mobile')),
             'work_phone'=>$this->security->xss_clean($this->input->post('work_phone')),
             'address'=>$this->security->xss_clean($this->input->post('address')),
         );
 
+        // update db record
         $this->db->where('id', $userid);
-        $this->db->update('user', $data);
- 
+        return $this->db->update('user', $data);
     } 
 
 }

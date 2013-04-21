@@ -70,8 +70,8 @@
             </tr>
             <tr>
                 <td>Email:</td>
-                <td><input type="text" name="email" value="<?php echo($this->session->userdata('email')); ?>" /></td>
-                <td>*<?php echo form_error('email'); ?></td>
+                <td><input type="text" name="email" readonly value="<?php echo($this->session->userdata('email')); ?>" /></td>
+                <td>*</td>
             </tr>
             <tr>
                 <td>Password:</td>

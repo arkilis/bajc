@@ -60,7 +60,10 @@ class Applicant extends CI_Controller {
     // go other documents  page
     public function goApplicantOtherDoc()
     {
-        $this->load->view('applicant_otherdoc');
+        $this->load->model('mdocuments');
+        $data['ay_res']= $this->mdocuments->getAllDocs();
+        $this->load->view('applicant_otherdoc', $data);
+
     }
 
     // go update profile page
@@ -75,7 +78,6 @@ class Applicant extends CI_Controller {
 
         // vlidate input
         $this->load->library('form_validation');
-        $this->form_validation->set_rules('email', 'Email', 'required|valid_email');        
         $this->form_validation->set_rules('fname', 'First Name', 'required');        
         $this->form_validation->set_rules('lname', 'Last Name', 'required');        
         $this->form_validation->set_rules('password', 'Password', 'required|repassword');        
@@ -91,7 +93,19 @@ class Applicant extends CI_Controller {
             $this->load->helper('url');    
             $this->load->model('MUser', '', TRUE);
             $this->load->library('session');    
-            $this->MUser->updateInfo($this->session->userdata('id'));
+            if($this->MUser->updateInfo($this->session->userdata('id')))
+            {
+                echo("<script>alert('Update Details Succeed!');</script>");
+                
+                // update session
+                $this->MUser->logout();
+                //$this->load->view('applicant_updateProfile');
+            }
+            else
+            {
+                echo("<script>alert('Update Details Faild, Try it again!');</script>");
+                $this->load->view('applicant_updateProfile');
+            }
              
         }
     }

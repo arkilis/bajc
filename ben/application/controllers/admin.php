@@ -5,13 +5,13 @@ class Admin extends CI_Controller {
     public function index()
 	{
         // admin's homepage is the upload document page
-        $this->load->view('uploaddocs');
+        $this->load->view('admin_uploaddocs');
 	}
 
     // go upload document page
     public function goUploadDocPage()
     {
-        $this->load->view('uploaddocs');
+        $this->load->view('admin_uploaddocs');
 	}
 
     // do upload document
@@ -23,14 +23,17 @@ class Admin extends CI_Controller {
         $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
     
         if($this->form_validation->run() == FALSE)
-            $this->load->view('uploaddocs');
+            $this->load->view('admin_uploaddocs');
         else
         {
             $this->load->model("mdocuments");
             
             // insert record 
             if($this->mdocuments->addDoc())
+            {
                 echo("<script>alert('Succeed!');</script>");
+                $this->listAllDocs();
+            }
             else
                 echo("<script>alert('Failed!');</script>");
         } 
@@ -41,7 +44,7 @@ class Admin extends CI_Controller {
     {
         $this->load->model('mdocuments');
         $data['ay_res']= $this->mdocuments->getAllDocs(); 
-        $this->load->view('listAlldocs', $data); 
+        $this->load->view('admin_listAlldocs', $data); 
     }
 
     // delete the document
@@ -49,11 +52,64 @@ class Admin extends CI_Controller {
     {
         $this->load->model('mdocuments');
         if($this->mdocuments->delDoc($docID))
+        {
             echo("<script>alert('Succeed!');</script>");
+            $this->listAllDocs(); 
+        }
         else
             echo("<script>alert('Failed!');</script>");
+    }
+
+    // go update document page
+    function goUpdateDoc($docID)
+    {
+        $this->load->model('mdocuments');
+        $data['ay_res']= $this->mdocuments->getDocById($docID);  
+        $this->load->view("admin_updateDoc", $data);
+    }
+
+    // update document
+    function updateDocName()
+    {
+        $docID=     $this->security->xss_clean($this->input->post('docid'));
+        $docname=   $this->security->xss_clean($this->input->post('docname'));
+        if($docID!="")
+        {
+            $this->load->model('mdocuments');
+            if($this->mdocuments->updateDoc($docID, $docname))
+            {
+                echo("<script>alert('Succeed!');</script>");
+                $this->listAllDocs();             
+            }
+            else
+                echo("<script>alert('Failed!');</script>");
             
-    } 
+        }
+    }
+
+    // go EOI list page
+    function goViewEOI()
+    {
+        $this->load->view("admin_eoi");
+    }
+
+    // go Proposal list page
+    function goViewProposal()
+    {
+       $this->load->view("admin_proposal");
+    }
+
+    // go Project list page
+    function goViewProject()
+    {
+       $this->load->view("admin_project");
+    }
+
+    // go Reports list page
+    function goViewReports()
+    {
+       $this->load->view("admin_reports");
+    }
 
 }
 
