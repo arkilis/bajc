@@ -24,8 +24,13 @@
         <?php echo anchor('admin/uploadDoc', ' '); ?>
     </div>
     <div id="item6">
-        <h2>View all Docs</h2>
+        <h2>View All Docs</h2>
         <p>Other Documents</p>
         <?php echo anchor('admin/listAllDocs', ' '); ?>
+    </div>
+    <div id="item7">
+        <h2>View all Users</h2>
+        <p>User Management</p>
+        <?php echo anchor('admin/listAllUsers', ' '); ?>
     </div>
 

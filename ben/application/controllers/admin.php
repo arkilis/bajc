@@ -19,6 +19,7 @@ class Admin extends CI_Controller {
     {
         // validate input
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->form_validation->set_rules('fileName', 'Document Name', 'required');
         $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
     
@@ -87,16 +88,43 @@ class Admin extends CI_Controller {
         }
     }
 
+    // call to activate an user
+    function activateUser($userid)
+    {
+        $this->load->model("muser");
+        $validate= $this->muser->activateUser($this->security->xss_clean($userid));
+        echo("<script>alert('Account has been activated successfully!');</script>");
+    } 
+
+    // call to de-activate an user
+    function deactivateUser($userid)
+    {
+        $this->load->model("muser");
+        $validate= $this->muser->deactivateUser($this->security->xss_clean($userid));
+        echo("<script>alert('Account has been deactivated successfully!');</script>");
+    } 
+
+
+    // go list all users
+    function listAllUsers()
+    {
+        $this->load->model("muser");
+        $data['ay_res']= $this->muser->getallUsers();
+        $this->load->view("admin_user", $data);
+    }    
+
     // go EOI list page
     function goViewEOI()
     {
-        $this->load->view("admin_eoi");
+        $this->load->model("meoi");
+        $data['ay_res']= $this->meoi->getAllEOIs();
+        $this->load->view("admin_eoi", $data);
     }
 
     // go Proposal list page
     function goViewProposal()
     {
-       $this->load->view("admin_proposal");
+        $this->load->view("admin_proposal");
     }
 
     // go Project list page

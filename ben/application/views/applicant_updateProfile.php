@@ -92,10 +92,8 @@
         </form>
         </fieldset>
     </div>
-</div>
-
 <!--footer-->
 <?php include("includes/footer.php"); ?>
-
+</div>
 </body>
 </html>

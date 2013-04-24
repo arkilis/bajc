@@ -13,35 +13,13 @@
 <!--body-->
 <div id="bodyPan"><!--style="border: black solid 1px"-->
   <div id="leftPan">
-	 <div id="item1">
-	    <h2>EOI</h2>
-    	<p></p>
-		<a href="#">&nbsp;</a>
-	</div>
-    <div id="item2">
-		<h2>Proposal</h2>
-		<p></p>
-		<a href="#">&nbsp;</a>
-	</div>
-    <div id="item3">
-		<h2>Project</h2>
-		<p></p>
-		<a href="#">&nbsp;</a>
-	</div>
-    <div id="item4">
-		<h2>Other Docs</h2>
-		<p>Other Documents</p>
-		<a href="#">&nbsp;</a>
-	</div>
+    <?php include("applicant_leftPan.php"); ?>
   </div>
   
   <div id="rightPan">
   </div>
-
-</div>
-
 <!--footer-->
 <?php include("includes/footer.php"); ?>
-
+</div>
 </body>
 </html>

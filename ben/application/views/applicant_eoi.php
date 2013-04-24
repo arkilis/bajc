@@ -8,7 +8,14 @@
 <script type="text/javascript" src="<?php echo base_url();?>/scripts/jquery-1.3.2.js"></script>
 <script type="text/javascript" src="<?php echo base_url();?>/scripts/ajaxfileupload.js"></script>
 <script type="text/javascript">
-      function ajaxFileUpload(type1, type2, fileid1, fileid2, field, msg){   
+      function ajaxFileUpload(type1, type2, fileid1, fileid2, field, msg){  
+
+          if(document.getElementById(fileid2).value=="")
+          {
+            alert("Please select choose a file first!");
+            return false;
+          }
+             
           //var url = $(fileid1).val();
           $("#loading").ajaxStart(function(){
               $(this).show();
@@ -37,7 +44,7 @@
                     }*/ 
               },
               error: function (data, status, e){
-                  alert(e);
+                  $("#"+msg).html(e);   
               }
           });
 		  
@@ -61,7 +68,7 @@
         $this->load->helper('form');
         echo form_open('applicant/addEOIUser');
     ?>
-    <table>
+    <table style="width:500px;">
         <tr>
             <td></td>
             <td><input type="hidden" name="eoiid" value="1" /></td>
@@ -69,24 +76,31 @@
         </tr>
         <tr>
             <td>EOI Title:</td>
-            <td><input type="text" name="eoiTitle" /></td>
+            <td><input type="text" name="eoiTitle" />*</td>
             <td class="error"><?php echo form_error('eoiTitle'); ?></td>
         </tr>
         <tr>
             <td>Chief Investigator:</td>
-            <td><input type="text" name="ci" value="7" /></td>
+            <td><input type="hidden" name="ci" value="<?php echo($this->session->userdata('id')); ?>" />
+                <input style="background-color:#DEDEDE"
+                    type="text" readonly 
+                    value="<?php echo($this->session->userdata('fname')." ".$this->session->userdata('lname')); ?>" 
+                />
+            *</td>
             <td class="error"><?php echo form_error('ci'); ?></td>
         </tr>
         <tr>
             <td>Chief Investigator's Organization:</td>
-            <td><input type="text" name="org" /></td>
+            <td><input type="text" name="org" />*</td>
             <td class="error"><?php echo form_error('org'); ?></td>
         </tr>
+        <!--
         <tr>
             <td>Group Member:</td>
-            <td><input type="text" name="member" /></td>
+            <td><input type="text" name="member" />*</td>
             <td class="error"><?php echo form_error('member'); ?></td>
         </tr>
+        -->
         <tr>
             <td>Upload Word Documents:</td>
             <td>
@@ -124,12 +138,10 @@
             <td></td>
         </tr>
     </table>
-  </div>
-
-</div>
-
+  </div>  
 <!--footer-->
 <?php include("includes/footer.php"); ?>
+</div>
 
 </body>
 </html>

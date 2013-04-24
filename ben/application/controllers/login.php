@@ -1,4 +1,6 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Login extends CI_Controller {
 
@@ -34,6 +36,7 @@ class Login extends CI_Controller {
 
         // vlidate input
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email');        
         $this->form_validation->set_rules('password', 'Password', 'required');        
         if ($this->form_validation->run() == FALSE)
@@ -94,6 +97,7 @@ class Login extends CI_Controller {
     {
         // vlidate input
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->form_validation->set_rules('email', 'Email', 'required|valid_email|is_unique[user.email]');        
         $this->form_validation->set_rules('fname', 'First Name', 'required');        
         $this->form_validation->set_rules('lname', 'Last Name', 'required');        
@@ -105,12 +109,15 @@ class Login extends CI_Controller {
         }
         else
         {
-            // call muser model 
-            //echo("<h1>Thank you for registration!</h1>"); 
             $this->load->helper('url');    
             $this->load->model('MUser', '', TRUE);
             $this->MUser->addUser();
-             
+            $this->load->model('memail');
+            $fullName= $this->input->post('fname')." ".$this->input->post('lname');
+            $this->memail->welcomeEmail($this->input->post('email'), $fullName);
+            $this->memail->welcomeEmailToAdmin($fullName);
+            echo("<script>alert('Thank you for registration! Our admin will activate your account soon!');</script>");
+            $this->load->view('login'); 
         }
                
     }
@@ -144,20 +151,6 @@ class Login extends CI_Controller {
         $validate= $this->muser->delUser($this->security->xss_clean($userid));
     }
 
-    // call to activate an user
-    function activateUser($userid)
-    {
-        $this->load->model("muser");
-        $validate= $this->muser->activateUser($this->security->xss_clean($userid));
-    } 
-
-    // call to de-activate an user
-    function deactivateUser($userid)
-    {
-        $this->load->model("muser");
-        $validate= $this->muser->deactivateUser($this->security->xss_clean($userid));
-    } 
-
     // get password back view page
     public function goForgetPassword()
     {
@@ -178,9 +171,10 @@ class Login extends CI_Controller {
     }
         
     // testing page
-    function goProjectPage()
+    function sendEmail()
     {
-        $this->load->view("applicant_project");
+        $this->load->model("memail");
+        $this->memail->sendEmail("arkilis@gmail.com","testing subject", "testing body");
     }
 
 }

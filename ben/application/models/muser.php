@@ -1,8 +1,8 @@
 <?php
+
 /****************************************************
 User class for all users (Applicant, TAC Member, Admi
 n, Board Member)
-
 *****************************************************/
 
 
@@ -127,7 +127,37 @@ class MUser extends CI_Model{
         // update db record
         $this->db->where('id', $userid);
         return $this->db->update('user', $data);
+    }
+
+    // list all the users
+    // id => title, fname, lname...
+    function getAllUsers()
+    {
+       $ay_res= array();
+       $query= $this->db->query("select * from user");
+       if($query->num_rows()>0)
+       {
+            foreach ($query->result() as $row)
+            {
+                $ay_tmp= array();
+                $ay_tmp[]=$row->title;      // 0
+                $ay_tmp[]=$row->fname;      // 1
+                $ay_tmp[]=$row->lname;      // 2
+                $ay_tmp[]=$row->gender;     // 3
+                $ay_tmp[]=$row->email;      // 4
+                $ay_tmp[]=$row->mobile;     // 5
+                $ay_tmp[]=$row->work_phone; // 6
+                $ay_tmp[]=$row->address;    // 7
+                $ay_tmp[]=$row->type;       // 8
+                $ay_tmp[]=$row->status;     // 9
+                
+                $ay_res[$row->id]=$ay_tmp; 
+            }
+        }
+        return $ay_res; 
     } 
+
+
 
 }
 

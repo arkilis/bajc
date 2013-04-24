@@ -1,4 +1,6 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php 
+
+if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
 class Applicant extends CI_Controller {
 
@@ -18,6 +20,7 @@ class Applicant extends CI_Controller {
     {
         // validate input
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->form_validation->set_rules('eoiTitle', 'EOI Title', 'required');
         $this->form_validation->set_rules('org', 'Organization', 'required');
         $this->form_validation->set_rules('word_doc', 'Word File', 'required');
@@ -28,8 +31,36 @@ class Applicant extends CI_Controller {
         else
         {
             $this->load->model("meoi");
-            $ret= $this->meoi->addEOIUser();
+            $dateTime= $this->meoi->getDateTime();
+            $ret= $this->meoi->addEOIUser($dateTime);
             
+            // debug
+            //echo(var_dump($ret)); 
+            
+            if($ret)
+            {
+                $eoititle= $this->security->xss_clean($this->input->post('eoiTitle'));
+                $org= $this->security->xss_clean($this->input->post('org'));    
+                $doc1= $this->security->xss_clean($this->input->post('word_doc'));
+                $doc2= $this->security->xss_clean($this->input->post('pdf_doc'));
+            
+                global $dateTime;
+            
+                // send email to user
+                $this->load->library("session");
+                $this->load->model("memail");
+                $this->memail->eoiEmail($this->session->userdata("email"), $this->session->userdata("fname")." ".$this->session->userdata("lname"),
+                        $eoititle, $org, $dateTime, $doc1, $doc2);
+                // send email to admin 
+                $this->memail->eoiEmailToAdmin($this->session->userdata("fname")." ".$this->session->userdata("lname"),
+                        $eoititle, $org, $dateTime, $doc1, $doc2);
+                echo("<script>alert('Thank you for submission!</script>"); 
+            }
+            else
+            {
+                echo("<script>alert('You already submitted an EOI! For furthur support, please contact the Admin!');</script>");
+                $this->goApplicantEOI();
+            }
         }
 
     }
@@ -78,6 +109,7 @@ class Applicant extends CI_Controller {
 
         // vlidate input
         $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
         $this->form_validation->set_rules('fname', 'First Name', 'required');        
         $this->form_validation->set_rules('lname', 'Last Name', 'required');        
         $this->form_validation->set_rules('password', 'Password', 'required|repassword');        
