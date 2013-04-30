@@ -12,7 +12,41 @@ class MEOI extends CI_Model{
         date_default_timezone_set("Australia/Brisbane"); 
         return date('Y-m-d H:i:s');
     }
- 
+
+    // get Current EOI, return EOI ID
+    function getCurrentEOI()
+    {
+        // compare with date,time to get the Current EOI
+        return 1;
+    }
+    
+    // get EOI_USER record via eoiid and userid
+    // return an array
+    // array:  eoiid, userid, subdate, title, org, doc1, doc2, is_proposal
+    function getEOIUser($eoiid, $userid)
+    {
+        $ay_res= array();
+        
+        $this->db->select('*');
+        $this->db->from('eoi_user');
+        $this->db->where('eoiid', $eoiid);
+        $this->db->where('userid', $userid);
+        $query= $this->db->get();
+        
+
+        foreach($query->result() as $row)
+        {
+           $ay_res[]= $row->eoiid; 
+           $ay_res[]= $row->userid; 
+           $ay_res[]= $row->subdate; 
+           $ay_res[]= $row->title; 
+           $ay_res[]= $row->org;        // 4 
+           $ay_res[]= $row->doc1; 
+           $ay_res[]= $row->doc2;       
+           $ay_res[]= $row->is_proposal; 
+        }
+        return $ay_res;        
+    }    
     
     // add an eoi
     function addEOI()
@@ -63,7 +97,7 @@ class MEOI extends CI_Model{
     {
         $ay_res= array();
         $sql = "select e.eoiname as eoiname, u.id as userid, ";
-        $sql.= "u.fname as fname, u.lname as lname, ";
+        $sql.= "u.fname as fname, u.lname as lname, eu.eoiid as eoiid,";
         $sql.= "eu.subdate as subdate, eu.title as title, "; 
         $sql.= "eu.org as org, eu.doc1 as doc1, eu.doc2 as doc2, "; 
         $sql.= "eu.is_proposal as is_proposal ";
@@ -77,15 +111,16 @@ class MEOI extends CI_Model{
             foreach ($query->result() as $row)
             {
                 $ay_tmp= array();
-                $ay_tmp[]=$row->subdate;
-                $ay_tmp[]=$row->fname." ".$row->lname;
-                $ay_tmp[]=$row->title;
-                $ay_tmp[]=$row->org;
-                $ay_tmp[]=$row->doc1;
-                $ay_tmp[]=$row->doc2;
-                $ay_tmp[]=$row->is_proposal;
-                $ay_tmp[]=$row->eoiname;
-                $ay_tmp[]=$row->userid;
+                $ay_tmp[]=$row->subdate;                // 0
+                $ay_tmp[]=$row->fname." ".$row->lname;  // 1
+                $ay_tmp[]=$row->title;                  // 2
+                $ay_tmp[]=$row->org;                    // 3
+                $ay_tmp[]=$row->doc1;                   // 4
+                $ay_tmp[]=$row->doc2;                   // 5
+                $ay_tmp[]=$row->is_proposal;            // 6
+                $ay_tmp[]=$row->eoiname;                // 7
+                $ay_tmp[]=$row->userid;                 // 8
+                $ay_tmp[]=$row->eoiid;                  // 9
                        
                 $ay_res[]=$ay_tmp; 
             }
@@ -93,5 +128,37 @@ class MEOI extends CI_Model{
         return $ay_res; 
     }
 
+    // grant EOI
+    function grantEOI($eoiid, $userid)
+    {
+        // update eoi_user table
+        $data = array('is_proposal' => 1); 
+        $this->db->where('eoiid', $eoiid);
+        $this->db->where('userid', $userid);
+        $this->db->update("eoi_user", $data);
+        
+        // insert an record into proposal_user
+        $this->load->model('mproposal');
+        $this->mproposal->addProposalUser($eoiid, $userid);
+     
+        // send notification email to user
+        
+    }   
+
+    // ungrant EOI
+    function ungrantEOI($eoiid, $userid)
+    {
+        // update eoi_user table
+        $data = array('is_proposal' => 0); 
+        $this->db->where('eoiid', $eoiid);
+        $this->db->where('userid', $userid);
+        $this->db->update("eoi_user", $data);
+
+        // delete the record from proposal_user
+        $this->load->model('mproposal');
+        $this->mproposal->delProposalUser($eoiid, $userid);
+        
+    }
+    
 }
 ?>

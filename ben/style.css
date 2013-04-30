@@ -4,15 +4,14 @@ body{padding:0; margin:0; font:14px/20px Arial, Helvetica, sans-serif; color:#3D
 ul{list-style-type:none;}
 
 /* TOP PANEL */
-#topPan{width:960px; height:150px; position:relative; margin:0 auto; padding:0;}
+#topPan {width:960px; height:150px; position:relative; margin:0 auto; padding:0; border-bottom:1px solid #8C9899}
+#topPan #infos{width:350px;top:10px;float:right}
+
 /*#topPan img{width:204px; height:57px; display:block; padding:23px 0 0 6px;}*/
 /* navigation Panel */
 #info {width:200px; float:right; color: #99003F; position:relative; top:-90px; z-index:99}
-#topPan ul{width:450px; height:20px; display:block; position:absolute; top:0px; right:0px; margin:0; padding:85px 0 0 0 ;}
-#topPan ul li{float:left; width:104px; display:block; text-align:center;}
-#topPan ul li a{width:104px; display:block; font:14px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E4E00; repeat-x #FFF; text-decoration:none; margin:0; margin: 15px 0 0 0;}
-#topPan ul li a:hover{ width:104px;display:block; background:#EAEAEA; color:#2E4E00; text-decoration:none;}
-#topPan ul li span{width:104px; height:35px; display:block; background:url(images/menu-devider1.gif) 100% 0 no-repeat #FFF; color:#2E4E00; text-decoration:none; padding:61px 0 0 0; line-height:14px;}
+#info p a {display:block; background:#EAEAEA; color:#2E4E00;font-size:14px;}
+
 #logo {width:490px;}
 
 /* /TOP PANEL */
@@ -64,7 +63,7 @@ ul{list-style-type:none;}
 #leftPan #item7 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
 /* BODY PANEL */
 
-#mid-bogy {width:80%; }
+#mid-body {top:125px;position:relative; margin:0 auto; width:100%}
 
 #bodyPan{width:960px; position:relative; margin:0 auto;}
 /*Left Panel */
@@ -91,18 +90,20 @@ ul{list-style-type:none;}
 
 /*/Left Panel */
 /*Right Panel */
-#rightPan{width:73%; border:1px solid #DCDAC2; background:#fff; color:#3D3C2C; float:right; margin-top:45px;}
+#rightPan{width:73%; border:1px solid #DCDAC2; background:#fff; color:#3D3C2C; float:right; margin-top:-5px;}
 #rightPan h2 {margin-left:20px;}
+#rightPan form table {margin-left:10px;}
+#rightPan table {margin-left:10px;}
 /* #rightBodyPan { margin-left:20px; margin-right:20px; } */
 
 /* /BODY PANEL */
 
 /* FOOTER PANEL */
-#footerPan {width:960px; height:231px; float:left; left:10px; top:50px; position:relative; margin:0 auto; padding:0;} 
-#footernextPan{width:100%; height:150px; position:absolute; top:0px; right:10px; background:#B0AD93; color:#fff; margin:0;}
+#footerPan {width:960px; height:231px; float:left; left:10px; top:50px; position:relative; margin:0 auto; padding:0;  } 
+#footernextPan{width:100%; height:150px; position:absolute; top:0px; right:10px; margin:0;border-top:1px solid #8C9899}
 #footerPan ul{width:380px; display:block; position:absolute; right:40px; top:33px; }
 #footerPan li{float:left; font:12px/15px "Trebuchet MS",Arial, Helvetica, sans-serif; font-weight:normal;}
-#footerPan ul li a{padding:0 10px; color:#FFFFFA; background:#B0AD93; text-decoration:none;}
+#footerPan ul li a{padding:0 10px; text-decoration:none;}
 #footerPan ul li a:hover{text-decoration:underline;}
 #footerPan ul li a.padl{padding:0 0 0 14px;}
 
@@ -110,7 +111,7 @@ ul{list-style-type:none;}
 #footerPan ul.templateworld li a{background:#B0AD93; display:block; color:#fff; text-decoration:none;}
 #footerPan ul.templateworld li a:hover{text-decoration:underline;}
 
-#footerPan p{ background:#B0AD93; margin:54px 45px 0 0; display:block; position:absolute; top:0px; right:40px; color:#FFF; font:12px/15px "Trebuchet MS",Arial, Helvetica, sans-serif;}
+#footerPan p{ margin:54px 45px 0 0; display:block; position:absolute; top:0px; right:40px; font:12px/15px "Trebuchet MS",Arial, Helvetica, sans-serif;}
 #footerPanhtml{width:64px; height:19px; display:block; position:absolute; top:78px; right:170px;}
 #footerPanhtml a{width:59px; height:19px; background:url(images/arrow5.gif) no-repeat 45px 0px #D0CEB8; display:block; position:absolute; top:0px; left:0px; margin:0; padding:0 0 0 5px; border:1px solid #FFFFFA; color:#353427; text-transform:uppercase; text-decoration:none;}
 #footerPanhtml a:hover{background:url(images/arrow5.gif) no-repeat 45px 0px #B0AD93; color:#353427; text-decoration:none;}
@@ -130,3 +131,5 @@ ul{list-style-type:none;}
 
 #login {width: 550px; text-align:left; margin:0 auto; padding-top:40px; padding-left:10px; padding-right:10px; padding-bottom:10px; margin-top:80px;  border: solid 1px #3D3C2C}
 
+#updateProfile {width:98%; text-align:center }
+#updateProfile #updateInfo{width:550px; margin:0 auto; text-align:left}

@@ -20,8 +20,6 @@ class Login extends CI_Controller {
                 redirect("tac/index");
             if($this->session->userdata('type')==3)
                 redirect("board/index");
-
-            
         }
         else    
         // if session not set
@@ -140,7 +138,7 @@ class Login extends CI_Controller {
             'is_logged_in' => NULL
         );
         $this->session->unset_userdata($data); // destroy session
-        echo("<script>alert('Thank you for using!')</script>");
+        //echo("<script>alert('Thank you for using!')</script>");
         $this->load->view('login');
     }
     
@@ -160,7 +158,10 @@ class Login extends CI_Controller {
     // get password back logical
     public function getPassword()
     {
-        
+        // get the email address, if the email exists in the db, send email to
+        // this email
+        // otherwise, notify there is no such email and welcome to register 
+         
     }
     
         

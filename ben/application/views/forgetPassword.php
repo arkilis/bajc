@@ -20,18 +20,13 @@ h3 {color:#7A7879; margin-left:10px; padding-top:20px; top:10px;}
         <?php
             $this->load->helper('form');
             //echo validation_errors();
-            echo form_open('login/ctlValidate'); 
+            echo form_open('login/getPassword'); 
         ?>
             <table id="login">
                 <tr>
                     <td style="width:30%;"><strong>Email:</strong></td>
-                    <td style="width:40%;"><input style="width:200px;" name="email" type="text" /></td>
+                    <td style="width:40%;"><input style="width:200px;" name="email" type="text" />*</td>
                     <td class="error"><?php echo form_error('email'); ?></td> 
-                </tr>
-                <tr>
-                    <td><strong>Password:</strong></td>
-                    <td><input style="width:200px;" name="password" type="password" /></td> 
-                    <td class="error"><?php echo form_error('password'); ?></td> 
                 </tr>
                 <tr>
                     <td></td>
@@ -40,8 +35,8 @@ h3 {color:#7A7879; margin-left:10px; padding-top:20px; top:10px;}
                 </tr>
                 <tr>
                     <td></td>
-                    <td><?php echo anchor('login/goRegister', 'Register as a new user') ?></td> 
-                    <td><?php echo anchor('login/goForgetPassword', 'Forget Password') ?></td> 
+                    <td><?php echo anchor('login/goRegister', 'Back to Previous Page') ?></td> 
+                    <td></td> 
                 </tr>
             </table>
             </form>

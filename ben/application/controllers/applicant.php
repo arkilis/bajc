@@ -52,9 +52,9 @@ class Applicant extends CI_Controller {
                 $this->memail->eoiEmail($this->session->userdata("email"), $this->session->userdata("fname")." ".$this->session->userdata("lname"),
                         $eoititle, $org, $dateTime, $doc1, $doc2);
                 // send email to admin 
+                echo("<script>alert('Thank you for submission!</script>"); 
                 $this->memail->eoiEmailToAdmin($this->session->userdata("fname")." ".$this->session->userdata("lname"),
                         $eoititle, $org, $dateTime, $doc1, $doc2);
-                echo("<script>alert('Thank you for submission!</script>"); 
             }
             else
             {
@@ -68,11 +68,16 @@ class Applicant extends CI_Controller {
     // go proposal submission page
     public function goApplicantProposal()
     {
-        $this->load->view('applicant_proposal');
+        //$this->output->enable_profiler(TRUE);
+        // load eoi info to proposal
+        $this->load->model('meoi');
+        $this->load->library('session');
+        $data['ay_res']= $this->meoi->getEOIUser($this->meoi->getCurrentEOI(), $this->session->userdata('id'));
+        $this->load->view('applicant_proposal', $data);
     }
     
     // submit proposal
-    public function addProposal()
+    public function addProposalUser()
     {
         
     }
@@ -80,21 +85,39 @@ class Applicant extends CI_Controller {
     // go project submission page
     public function goApplicantProject()
     {
-        $this->load->view('applicant_project');
+        //$this->output->enable_profiler(TRUE);
+        // load eoi info to proposal
+        $this->load->model('mproposal');
+        $this->load->model('meoi');
+        $this->load->library('session');
+        $data['ay_res']= $this->mproposal->getProposalUser($this->meoi->getCurrentEOI(), $this->session->userdata('id'));
+        $this->load->view('applicant_project', $data);
+        //var_dump($data);
     }
    
     // submit project
-    public function addProject()
+    public function addProjectUser()
     {
-    }    
+    } 
  
-    // go other documents  page
+    // go other documents page
     public function goApplicantOtherDoc()
     {
         $this->load->model('mdocuments');
         $data['ay_res']= $this->mdocuments->getAllDocs();
         $this->load->view('applicant_otherdoc', $data);
 
+    }
+
+    // go view submitted EOI page
+    function goViewEOI()
+    {
+        // get current EOI id
+        $eoiid=1;
+        $this->load->library('session');    
+        $this->load->model('meoi');
+        $data['ay_res']= $this->meoi->getEOIUser($eoiid, $this->session->userdata['id']);
+        $this->load->view('applicant_viewEOI', $data);
     }
 
     // go update profile page

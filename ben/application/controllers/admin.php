@@ -4,8 +4,7 @@ class Admin extends CI_Controller {
 
     public function index()
 	{
-        // admin's homepage is the upload document page
-        $this->load->view('admin_uploaddocs');
+        $this->goViewEOI();
 	}
 
     // go upload document page
@@ -137,6 +136,24 @@ class Admin extends CI_Controller {
     function goViewReports()
     {
        $this->load->view("admin_reports");
+    }
+
+    // call to grant EOI
+    function grantEOI($eoiid, $userid)
+    {
+        $this->load->model("meoi");
+        $this->meoi->grantEOI($eoiid, $userid);
+        echo("<script>alert('EOI has been granted!');</script>");
+        $this->goViewEOI();
+    }
+
+    // call to ungrant EOI
+    function ungrantEOI($eoiid, $userid)
+    {
+        $this->load->model("meoi");
+        $this->meoi->ungrantEOI($eoiid, $userid);
+        echo("<script>alert('EOI has been ungranted!');</script>");
+        $this->goViewEOI();
     }
 
 }

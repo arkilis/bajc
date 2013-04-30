@@ -10,13 +10,13 @@
 <?php include("includes/header2.php"); ?>
 <!--body-->
 <div id="bodyPan"><!--style="border: black solid 1px"-->
-    <div id="mid-body">
-        <fieldset>
+    <div id="mid-body" style="top:20px">
+        <fieldset id="updateProfile">
         <?php
             $this->load->helper('form');
             echo form_open('applicant/updateProfile');
         ?>
-        <table>
+        <table id="updateInfo">
             <tr>
                 <td>Fill all fields with *</td>
                 <td></td>

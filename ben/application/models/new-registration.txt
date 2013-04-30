@@ -1,0 +1,9 @@
+<p style="font-family:Verdana;font-size:9">Dear #USERNAME#,</p>
+<br />
+
+<p style="font-family:Verdana;font-size:9">Thank you for joining us. #WEBSITENAME#.</p>
+<br />
+<p style="font-family:Verdana;font-size:9">#MESSAGE#</p>
+<br />
+
+<p style="font-family:Verdana;font-size:9">-Regards</p>

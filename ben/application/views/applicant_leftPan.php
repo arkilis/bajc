@@ -14,6 +14,11 @@
         <?php echo anchor('applicant/goApplicantProject', ' '); ?>
     </div>
     <div id="item4">
+        <h2>View EOI</h2>
+        <p>View Your Submission</p>
+        <?php echo anchor('applicant/goViewEOI', ' '); ?>
+    </div>
+    <div id="item5">
         <h2>Documents</h2>
         <p>Other Documents</p>
         <?php echo anchor('applicant/goApplicantOtherDoc', ' '); ?>

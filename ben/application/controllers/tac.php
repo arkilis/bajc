@@ -32,11 +32,11 @@ class Tac extends CI_Controller {
     // go other document list page
     function goViewOtherDocs()
     {
-       $this->output->enable_profiler(TRUE); 
+       //$this->output->enable_profiler(TRUE); 
        $this->load->model('mdocuments');
        $data['ay_res']= $this->mdocuments->getAllDocs();
-       print_r($data);
-       //$this->load->view("tac_otherDocs", $data); 
+       //print_r($data);
+       $this->load->view("tac_otherDocs", $data); 
     } 
     // thanks page
     function thanks()

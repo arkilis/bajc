@@ -13,7 +13,6 @@ error_reporting(E_ALL & ~E_NOTICE);
 
 
 // get types and file
-$type1=$_POST['type1'];
 $type2=$_POST['type2'];
 
 array_push($_FILES,$_REQUEST);
@@ -34,14 +33,14 @@ else
 	$dateTime=getCurDateTime();
 	if($type2=="doc")
     {
-		$newFilename=$UPLOAD_EOI."/word/".$dateTime.".".$fileType;
+		$newFilename=$UPLOAD_PROJECT."/report1/".$dateTime.".".$fileType;
         
         # debug
         #echo($fileType);
 	}
     if($type2=="pdf")
     {
-		$newFilename=$UPLOAD_EOI."/pdf/".$dateTime.".".$fileType;
+		$newFilename=$UPLOAD_PROJECT."/report2/".$dateTime.".".$fileType;
     
         # debug
         #echo($fileType);

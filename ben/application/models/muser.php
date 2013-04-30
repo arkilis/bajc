@@ -62,7 +62,7 @@ class MUser extends CI_Model{
             'is_logged_in' => NULL
         );
         $this->session->unset_userdata($data); // destroy session
-        echo("<script>alert('Thank you for using!')</script>");
+        //echo("<script>alert('Thank you for using!')</script>");
         $this->load->view('login');
     }
 
@@ -158,6 +158,13 @@ class MUser extends CI_Model{
     } 
 
 
+    // get User from userid
+    // 
+    function getUserById($userid)
+    {
+        $ar_res= array();
+
+    }
 
 }
 

@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>BAJC - EOI submission</title>
+<title>BAJC - EOI Submission</title>
 <link href="<?php echo base_url();?>/style.css" rel="stylesheet" type="text/css" />
 </head>
 <script type="text/javascript" src="<?php echo base_url();?>/scripts/jquery-1.3.2.js"></script>
@@ -30,9 +30,20 @@
               fileElementId: fileid2,//ÓëÒ³Ãæ´¦Àí´úÂëÖÐfileÏà¶ÔÓ¦µÄIDÖµ
               dataType: 'text',//·µ»ØÊý¾ÝÀàÐÍ:text£¬xml£¬json£¬html,scritp,jsonpÎåÖÖ
               success: function (data, status){
-                  $("#"+field).val(data);   
-                  $("#"+msg).html("Succeed!");   
-		          //alert(data);
+                  alert(data);
+                  if(data=="0")
+                  {
+                    $("#"+msg).html("Please upload the file with right file format!");   
+		          }
+                  else if(data=="-1")
+                  {
+                    $("#"+msg).html("Upload Failed!");
+		          }
+                  else{
+                    $("#"+field).val(data);  
+                    $("#"+msg).html("Succeed!");              
+                  }
+                  //alert(data);
                   /*if(typeof(data.error) != 'undefined')   {   
                         if(data.error != '')   { 
                             $("#file").val(data.fileUrl); 
