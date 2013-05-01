@@ -20,6 +20,8 @@ ul{list-style-type:none;}
 #headerPan{width:960px; height:307px; position:relative; margin:0 auto; padding:0;}
 #headerPan h1{width:526px; height:236px; position:absolute; top:35px; right:0px; background:url(images/header-img.jpg) 0 0 no-repeat #FFF; color:#fff; font-size:36px; line-height:18px; text-transform:uppercase; text-indent:-2000px;}
 #headerPanleft{ width:237px; height:214px; position:absolute; top:48px; left:9px;}
+
+
 #leftPan #item1{ float:left; width:237px; height:62px; position:relative; margin:0 auto; background:url(images/icon1-nor.gif) 0 0 no-repeat;}
 #leftPan #item1 h2{width:90px; height:10px; background:#fff; display:block; position:absolute; left:0px; top:0px; margin:14px 0 5px 81px; font:16px/14px Georgia, "Times New Roman", Times, serif; color:#CC0000; z-index:1; text-transform:uppercase;}
 #leftPan #item1 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
@@ -61,6 +63,12 @@ ul{list-style-type:none;}
 #leftPan #item7 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
 #leftPan #item7 a{text-decoration:none; display:block; width:237px; height:62px;}
 #leftPan #item7 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
+
+#leftPan #item8{ float:left; width:237px; height:62px; position:relative; margin:13px 0 0 0; background:url(images/icon3-nor.gif) 0 0 no-repeat;}
+#leftPan #item8 h2{width:100px; height:10px; background:#fff; display:block; position:absolute; left:0px; top:0px; margin:14px 0 5px 81px; font:11px Georgia, "Times New Roman", Times, serif; color:#CC0000; z-index:1; text-transform:uppercase;}
+#leftPan #item8 p{width:103px; height:10px; display:block; position:absolute; font:12px/14px "Trebuchet MS",Arial, Helvetica, sans-serif; color:#2E5000; background:#fff; margin:34px 0 0 81px; z-index:1; }
+#leftPan #item8 a{text-decoration:none; display:block; width:237px; height:62px;}
+#leftPan #item8 a:hover{text-decoration:none; background:url(images/icon3-hover.gif) no-repeat 0 0;}
 /* BODY PANEL */
 
 #mid-body {top:125px;position:relative; margin:0 auto; width:100%}

@@ -39,7 +39,7 @@
               fileElementId: fileid2,//与页面处理代码中file相对应的ID值
               dataType: 'text',//返回数据类型:text，xml，json，html,scritp,jsonp五种
               success: function (data, status){
-                  alert(data);
+                  //alert(status);
                   if(data=="0")
                   {
                     $("#"+msg).html("Please upload the file with right file format!");   
@@ -48,20 +48,11 @@
                   {
                     $("#"+msg).html("Upload Failed!");
 		          }
-                  else{
+                  else
+                  {
                     $("#"+field).val(data);  
-                    $("#"+msg).html("Succeed!");              
-                  }
-                  //alert(data);
-                  /*if(typeof(data.error) != 'undefined')   {   
-                        if(data.error != '')   { 
-                            $("#file").val(data.fileUrl); 
-                            $("#msg").html("<b style='color:red;'>"+data.error+"</b>");   
-                        }else {
-                             $("#file").val(data.fileUrl);    
-                            $("#msg").html("<b style='color:green;'>"+data.msg+"</b>"); 
-                        }   
-                    }*/ 
+                    $("#"+msg).html("Succeed!");
+                  } 
               },
               error: function (data, status, e){
                   $("#"+msg).html(e);   
@@ -120,7 +111,7 @@
             <td>Upload Word Documents:</td>
             <td>
 				<input type="file" id="word_doc" name="word_doc" />
-				<a href="javascript:void(0)" onclick="return ajaxFileUpload('Proposal','doc','word_doc','word_doc', 'word_msg', 'msg1');">Add</a>
+				<a href="javascript:void(0)" onclick="return ajaxFileUpload('Proposal','doc', 'word_doc', 'word_msg', 'msg1');">Add</a>
 			</td>
             <td></td>
         </tr>
@@ -133,7 +124,7 @@
             <td>Upload PDF Documents:</td>
             <td>
 				<input type="file" id="pdf_doc" name="pdf_doc" />
-				<a href="javascript:void(0)" onclick="return ajaxFileUpload('Proposal','pdf','pdf_doc', 'pdf_doc', 'pdf_msg', 'msg2');">Add</a>
+				<a href="javascript:void(0)" onclick="return ajaxFileUpload('Proposal','pdf','pdf_doc', 'pdf_msg', 'msg2');">Add</a>
 			</td>
             <td></td>
         </tr>

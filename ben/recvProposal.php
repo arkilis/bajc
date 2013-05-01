@@ -50,13 +50,15 @@ else
 	{
         if (move_uploaded_file ($_FILES['word_doc']['tmp_name'],$newFilename))
     		exit($newFilename);
-	    exit("-1"); // -1: upload failed
+        else
+	        exit("-1"); // -1: upload failed
 	}
     if($_FILES['pdf_doc']['name']!="")
 	{
         if (move_uploaded_file ($_FILES['pdf_doc']['tmp_name'],$newFilename))
     		exit($newFilename);
-	    exit("-1");
+        else
+	        exit("-1");
 	}
 }
 ?>
