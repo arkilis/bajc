@@ -136,8 +136,19 @@ ul{list-style-type:none;}
 
 .docTable {text-align:center; width:100%}
 .heading {font-weight:bold; background-color:#EAEAEA}
+.setting {text-align:center; width:97%}
+.setting .heading .col1 {width:20%}
+.setting .heading .col2 {width:25%}
+.setting .heading .col3 {width:25%}
+.setting .heading .col4 {width:10%}
+.setting .heading .col5 {width:20%}
+
 
 #login {width: 550px; text-align:left; margin:0 auto; padding-top:40px; padding-left:10px; padding-right:10px; padding-bottom:10px; margin-top:80px;  border: solid 1px #3D3C2C}
 
 #updateProfile {width:98%; text-align:center }
 #updateProfile #updateInfo{width:550px; margin:0 auto; text-align:left}
+
+#admin_set_eoi{}
+#admin_set_proposal {margin-top:50px;}
+#admin_set_project {margin-top:50px;}

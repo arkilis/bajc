@@ -156,6 +156,94 @@ class Admin extends CI_Controller {
         $this->goViewEOI();
     }
 
+    // go setting up page
+    function goViewSetting()
+    {   
+        $this->load->model('meoi');
+        $this->load->model('mproposal');
+        $this->load->model('mproject');
+        $data['ay_res_eoi']= $this->meoi->getEOI($this->meoi->getCurrentEOI());
+        $data['ay_res_proposal']= $this->mproposal->getProposal($this->meoi->getCurrentEOI());
+        $data['ay_res_project']= $this->mproject->getProject($this->meoi->getCurrentEOI());
+ 
+        $this->load->view("admin_setting", $data);
+    }
+
+    // go update eoi page
+    function goViewUpdateEOI()
+    {
+        $this->load->model('meoi');
+        $this->meoi->addEOI();
+        $this->load->view("admin_updateEOI"); 
+    }
+
+    // go add eoi page
+    function goViewAddEOI()
+    {
+       $this->load->view("admin_addEOI"); 
+    }
+
+    // call to add an EOi
+    function addEOI()
+    {
+        // validate input
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->form_validation->set_rules('fileName', 'Document Name', 'required');
+        $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
+    
+        if($this->form_validation->run() == FALSE)
+            $this->load->view('admin_uploaddocs');
+        else
+        {
+            
+        } 
+
+    }
+
+    // call to update an EOi
+    function updateEOI()
+    {
+        // validate input
+        $this->load->library('form_validation');
+        $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
+        $this->form_validation->set_rules('fileName', 'Document Name', 'required');
+        $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
+    
+        if($this->form_validation->run() == FALSE)
+            $this->load->view('admin_uploaddocs');
+        else
+        {
+            
+        } 
+
+    }
+
+    // go update proposal page
+    function goViewUpdateProposal()
+    {
+       $this->load->view("admin_updateProposal"); 
+    }
+    
+    // go add eoi page
+    function goViewAddProposal()
+    {
+       $this->load->view("admin_addProposal"); 
+    }
+
+    // go update eoi page
+    function goViewUpdateProject()
+    {
+       $this->load->view("admin_updateProject"); 
+    }
+    
+    // go add eoi page
+    function goViewAddProject()
+    {
+       $this->load->view("admin_addProject"); 
+    }
+
+
 }
 
 /* End of file welcome.php */

@@ -103,6 +103,64 @@ class MProposal extends CI_Model{
     }  
 
 
+    // add a proposal
+    function addProposal()
+    {
+        $data= array(
+            'eoiid'=>$this->security->xss_clean($this->input->post('eoiid')),
+            'proposalname'=>$this->security->xss_clean($this->input->post('proposalname')),
+            'startdatetime'=>$this->security->xss_clean($this->input->post('startdatetime')),
+            'deadline'=>$this->security->xss_clean($this->input->post('deadline')),
+            'description'=>$this->security->xss_clean($this->input->post('description'))
+        );
+
+        $this->db->insert('proposal', $data);
+        
+    }
+
+    // delete a proposal
+    function delProposal($proposalid)
+    {
+        $this->db->where('id', $proposalid);
+        $this->db->delete('proposal');
+    }
+
+    // update an eoi
+    function updateProposal($proposalid)
+    {
+        $data= array(
+            'eoiid'=>$this->security->xss_clean($this->input->post('eoiid')),
+            'proposalname'=>$this->security->xss_clean($this->input->post('proposalname')),
+            'startdatetime'=>$this->security->xss_clean($this->input->post('startdatetime')),
+            'deadline'=>$this->security->xss_clean($this->input->post('deadline')),
+            'description'=>$this->security->xss_clean($this->input->post('description'))
+        );
+        $this->db->where('id', $proposalid);
+        $this->db->update('proposalid', $data);
+    } 
+
+
+    // get Proposal
+    function getProposal($eoiid)
+    {
+        $ay_res= array();
+        
+        $this->db->select('*');
+        $this->db->from('proposal');
+        $this->db->where('eoiid', $eoiid);
+        $query= $this->db->get();
+        
+
+        foreach($query->result() as $row)
+        {
+           $ay_res[]= $row->eoiid;; 
+           $ay_res[]= $row->proposalname;; 
+           $ay_res[]= $row->subdatetime; 
+           $ay_res[]= $row->deadline; 
+           $ay_res[]= $row->description;; 
+        }
+        return $ay_res;        
+    }
 
 
 

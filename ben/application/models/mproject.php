@@ -31,7 +31,7 @@ class MProject extends CI_Model{
     {
         $this->db->where('eoiid', $eoiid);    
         $this->db->where('userid', $userid);    
-        $this->db->delete('project_user')    
+        $this->db->delete('project_user'); 
     } 
 
 
@@ -39,6 +39,30 @@ class MProject extends CI_Model{
     function getAllProjects()
     {
     }
+
+
+    // get Proposal
+    function getProject($eoiid)
+    {
+        $ay_res= array();
+        
+        $this->db->select('*');
+        $this->db->from('project');
+        $this->db->where('eoiid', $eoiid);
+        $query= $this->db->get();
+        
+
+        foreach($query->result() as $row)
+        {
+           $ay_res[]= $row->eoiid; 
+           $ay_res[]= $row->projectTitle;; 
+           $ay_res[]= $row->subdatetime; 
+           $ay_res[]= $row->deadline; 
+           $ay_res[]= $row->description;; 
+        }
+        return $ay_res;        
+    }
+
 
 }
 ?>

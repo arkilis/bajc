@@ -1,7 +1,7 @@
     <div id="item1">
         <h2>Setting</h2>
         <p>Initialize Date</p>
-        <?php echo anchor('admin/goViewEOI', ' '); ?>
+        <?php echo anchor('admin/goViewSetting', ' '); ?>
     </div>
     <div id="item2">
         <h2>EOI</h2>

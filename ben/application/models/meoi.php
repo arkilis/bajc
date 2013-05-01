@@ -13,6 +13,29 @@ class MEOI extends CI_Model{
         return date('Y-m-d H:i:s');
     }
 
+
+    function getEOI($eoiid)
+    {
+        $ay_res= array();
+        
+        $this->db->select('*');
+        $this->db->from('eoi');
+        $this->db->where('id', $eoiid);
+        $query= $this->db->get();
+        
+
+        foreach($query->result() as $row)
+        {
+           $ay_res[]= $row->id; 
+           $ay_res[]= $row->eoiname;; 
+           $ay_res[]= $row->startdatetime; 
+           $ay_res[]= $row->deadline; 
+           $ay_res[]= $row->description;; 
+        }
+        return $ay_res;        
+    }
+
+
     // get Current EOI, return EOI ID
     function getCurrentEOI()
     {
@@ -54,7 +77,8 @@ class MEOI extends CI_Model{
         $data= array(
             'eoiname'=>$this->security->xss_clean($this->input->post('eoiname')),
             'startdatetime'=>$this->security->xss_clean($this->input->post('startdatetime')),
-            'deadline'=>$this->security->xss_clean($this->input->post('deadline'))
+            'deadline'=>$this->security->xss_clean($this->input->post('deadline')),
+            'description'=>$this->security->xss_clean($this->input->post('description'))
         );
 
         $this->db->insert('eoi', $data);
@@ -65,6 +89,19 @@ class MEOI extends CI_Model{
     {
         $this->db->where('id', $eoiid);
         $this->db->delete('eoi');   
+    }
+
+    // update an eoi
+    function updateEOI($eoiid)
+    {
+        $data= array(
+            'eoiname'=>$this->security->xss_clean($this->input->post('eoiname')),
+            'startdatetime'=>$this->security->xss_clean($this->input->post('startdatetime')),
+            'deadline'=>$this->security->xss_clean($this->input->post('deadline')),
+            'description'=>$this->security->xss_clean($this->input->post('description'))
+        );
+        $this->db->where('id', $eoiid);
+        $this->db->update('eoi', $data);
     } 
 
     // add an eoi_user record
