@@ -14,6 +14,8 @@ class MEOI extends CI_Model{
     }
 
 
+    // return an array
+    // id, eoiname, startdatetime, deadline, descritption
     function getEOI($eoiid)
     {
         $ay_res= array();
@@ -81,7 +83,7 @@ class MEOI extends CI_Model{
             'description'=>$this->security->xss_clean($this->input->post('description'))
         );
 
-        $this->db->insert('eoi', $data);
+        return $this->db->insert('eoi', $data);
     }
 
     // delete an eoi
@@ -101,7 +103,7 @@ class MEOI extends CI_Model{
             'description'=>$this->security->xss_clean($this->input->post('description'))
         );
         $this->db->where('id', $eoiid);
-        $this->db->update('eoi', $data);
+        return $this->db->update('eoi', $data);
     } 
 
     // add an eoi_user record

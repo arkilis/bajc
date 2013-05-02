@@ -170,11 +170,11 @@ class Admin extends CI_Controller {
     }
 
     // go update eoi page
-    function goViewUpdateEOI()
+    function goViewUpdateEOI($eoiid)
     {
         $this->load->model('meoi');
-        $this->meoi->addEOI();
-        $this->load->view("admin_updateEOI"); 
+        $data['ay_res']= $this->meoi->getEOI($eoiid);
+        $this->load->view("admin_updateEOI", $data); 
     }
 
     // go add eoi page
@@ -189,14 +189,20 @@ class Admin extends CI_Controller {
         // validate input
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        $this->form_validation->set_rules('fileName', 'Document Name', 'required');
-        $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
+        $this->form_validation->set_rules('eoiname', 'EOI Name', 'required');
+        $this->form_validation->set_rules('startdatetime', 'Start Date & Time', 'required');
+        $this->form_validation->set_rules('deadline', 'Deadline', 'required');
     
         if($this->form_validation->run() == FALSE)
-            $this->load->view('admin_uploaddocs');
+            $this->load->view('admin_addEOI');
         else
         {
-            
+            $this->load->model("meoi"); 
+            if($this->meoi->addEOI())
+                echo("<script>alert('Succeed!');</script>");
+            else
+                echo("<script>alert('Failed!');</script>");
+            $this->goViewSetting();
         } 
 
     }
@@ -207,16 +213,23 @@ class Admin extends CI_Controller {
         // validate input
         $this->load->library('form_validation');
         $this->form_validation->set_error_delimiters('<div class="error">', '</div>');
-        $this->form_validation->set_rules('fileName', 'Document Name', 'required');
-        $this->form_validation->set_rules('doc_path', 'Upload Document', 'required');
+        $this->form_validation->set_rules('eoiname', 'EOI Name', 'required');
+        $this->form_validation->set_rules('startdatetime', 'Start Date & Time', 'required');
+        $this->form_validation->set_rules('deadline', 'Deadline', 'required');
     
         if($this->form_validation->run() == FALSE)
-            $this->load->view('admin_uploaddocs');
+            $this->load->view('admin_updateEOI');
         else
         {
+            $this->load->model("meoi"); 
             
+            //var_dump($this->meoi->updateEOI($this->security->xss_clean($this->input->post('eoiid'))));
+            if($this->meoi->updateEOI($this->security->xss_clean($this->input->post('eoiid'))))
+                echo("<script>alert('Succeed!');</script>");
+            else
+                echo("<script>alert('Failed!');</script>");
+            $this->goViewUpdateEOI($this->security->xss_clean($this->input->post('eoiid'))); 
         } 
-
     }
 
     // go update proposal page

@@ -4,10 +4,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
 <title>BAJC - Update EOI</title>
 <link href="<?php echo base_url();?>/style.css" rel="stylesheet" type="text/css" />
+<link rel="stylesheet" href="<?php echo base_url(); ?>/build/kalendae.css" type="text/css" charset="utf-8">
+<script src="<?php echo base_url(); ?>/build/kalendae.standalone.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css" media="screen">
+        .kalendae .k-days span.closed {
+            background:red;
+        }
+</style>
 </head>
-<script type="text/javascript" src="<?php echo base_url();?>/scripts/jquery-1.3.2.js"></script>
-<script type="text/javascript" src="<?php echo base_url();?>/scripts/ajaxfileupload.js"></script>
-</script>
 <body>
 <!--include header-->
 <?php include("includes/header2.php"); ?>
@@ -26,27 +30,28 @@
         echo form_open('admin/updateEOI');
     ?>
     <table>
+        <input type="hidden" value="<?php echo($ay_res[0]); ?>" name="eoiid" />
         <tr>
             <td>EOI Title:</td>
-            <td><input name="eoiname" type="text" value="" /></td>
+            <td><input name="eoiname" type="text" value="<?php echo($ay_res[1]); ?>" /></td>
             <td>*</td>
             <td class="error"><?php echo form_error('eoiname'); ?></td>
         </tr>
         <tr>
             <td>Start Date & Time:</td>
-            <td><input name="startdatetime" type="text" /></td>
+            <td><input type="text" class="auto-kal" name="startdatetime" value="<?php echo($ay_res[2]); ?>" /></td>
             <td>*</td>
-            <td class="error"><?php echo form_error('startdatetime'); ?></td>
+    <td class="error"><?php echo form_error('startdatetime'); ?></td>
         </tr>
         <tr>
             <td>End Date & Time:</td>
-            <td><input name="deadline" type="text" /></td>
+            <td><input type="text" class="auto-kal" name="deadline" value="<?php echo($ay_res[3]); ?>" /></td>
             <td>*</td>
             <td class="error"><?php echo form_error('deadline'); ?></td>
         </tr>
         <tr>
             <td>Description:</td>
-            <td><textarea name="description" cols=60 rows=4></textarea></td>
+            <td><textarea name="description" cols=60 rows=4><?php echo($ay_res[4]); ?></textarea></td>
             <td></td>
             <td class="error"><?php echo form_error('description'); ?></td>
         </tr>

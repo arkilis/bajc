@@ -2,7 +2,7 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>BAJC - EOI List</title>
+<title>BAJC - Admin Setting</title>
 <link href="<?php echo base_url();?>/style.css" rel="stylesheet" type="text/css" />
 </head>
 <script type="text/javascript" src="<?php echo base_url();?>/scripts/jquery-1.3.2.js"></script>
@@ -29,7 +29,6 @@
                     <td class="col2">Start Date & Time</td>
                     <td class="col3">EndDate & Time</td>
                     <td class="col4"></td>
-                    <td class="col5"></td>
                 </tr>
                 <?php
                     if(count($ay_res_eoi)!=0)
@@ -38,12 +37,12 @@
                         echo("<td>".$ay_res_eoi[1]."</td>");
                         echo("<td>".$ay_res_eoi[2]."</td>");
                         echo("<td>".$ay_res_eoi[3]."</td>");
-                        echo("<td><a href='".site_url('admin/goViewUpdateEOI')."' />Update</a></td>");
-                        echo("<td>Remove</td>");
+                        $url="admin/goViewUpdateEOI/".$ay_res_eoi[0];
+                        echo("<td><a href='".site_url($url)."' />Update</a></td>");
                         echo("</tr>");
                     }
                     else
-                        echo("<tr><td colspan=5 style='text-align:left'>You do not set up EOI yet. Set it <a href='".site_url('admin/goViewAddEOI')."' >here</a>.</td></tr>");
+                        echo("<tr><td colspan=5 style='text-align:left; padding-left:30px; padding-top:10px;'>You do not set up EOI yet. Set it <a href='".site_url('admin/goViewAddEOI')."' >here</a>.</td></tr>");
                 ?>
             </table>
         </div>
@@ -55,7 +54,6 @@
                     <td class="col2">Start Date & Time</td>
                     <td class="col3">EndDate & Time</td>
                     <td class="col4"></td>
-                    <td class="col5"></td>
                 </tr>
                 <?php
                     if(count($ay_res_proposal)!=0)
@@ -65,11 +63,10 @@
                         echo("<td>".$ay_res_proposal[2]."</td>");
                         echo("<td>".$ay_res_proposal[3]."</td>");
                         echo("<td><a href='".site_url('admin/goViewUpdateProposal')."' />Update</a></td>");
-                        echo("<td>Remove</td>");
                         echo("</tr>");
                     }
                     else
-                        echo("<tr><td colspan=5 style='text-align:left'>You do not set up Proposal yet. Set it <a href='".site_url('admin/goViewAddProposal')."' >here</a>.</td></tr>");
+                        echo("<tr><td colspan=5 style='text-align:left; padding-left:30px; padding-top:10px;'>You do not set up Proposal yet. Set it <a href='".site_url('admin/goViewAddProposal')."' >here</a>.</td></tr>");
                 ?>
             </table>
         </div>
@@ -81,7 +78,6 @@
                     <td class="col2">Start Date & Time</td>
                     <td class="col3">EndDate & Time</td>
                     <td class="col4"></td>
-                    <td class="col5"></td>
                 </tr>
                 <?php
                 
@@ -92,11 +88,10 @@
                         echo("<td>".$ay_res_project[2]."</td>");
                         echo("<td>".$ay_res_project[3]."</td>");
                         echo("<td><a href='".site_url('admin/goViewUpdateProjet')."' />Update</a></td>");
-                        echo("<td>Remove</td>");
                         echo("</tr>");
                     }
                     else
-                        echo("<tr><td colspan=5 style='text-align:left'>You do not set up Project yet. Set it <a href='".site_url('admin/goViewAddProject')."' >here</a>.</td></tr>");
+                        echo("<tr><td colspan=5 style='text-align:left; padding-left:30px; padding-top:10px;'>You do not set up Project yet. Set it <a href='".site_url('admin/goViewAddProject')."' >here</a>.</td></tr>");
                 ?>
             </table>
         </div>
